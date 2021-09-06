@@ -1,4 +1,5 @@
 import express, { Express } from 'express';
+import logger from './helpers/logger';
 
 const {
   APP_PORT,
@@ -18,14 +19,13 @@ class App {
 
   private setupHealthCheck() {
     this.app.get('/', (req, res, next) => {
-      res.send('Server running!🚀');
+      res.json({ message: 'Server running!🚀' });
     });
   }
 
   public listen() {
     return this.app.listen(this.port, () => {
-      // TODO - ADD LOGGER
-      console.log(`Server running on http://localhost:${this.port}🚀`);
+      logger.info(`Server running on http://localhost:${this.port}🚀`);
     });
   }
 }
