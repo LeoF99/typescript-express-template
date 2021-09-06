@@ -12,12 +12,20 @@ class App {
   constructor() {
     this.app = express();
     this.port = Number(APP_PORT) || 5000;
+
+    this.setupHealthCheck();
+  }
+
+  private setupHealthCheck() {
+    this.app.get('/', (req, res, next) => {
+      res.send('Server running!🚀');
+    });
   }
 
   public listen() {
     return this.app.listen(this.port, () => {
       // TODO - ADD LOGGER
-      console.log(`Server running on http://localhost:${this.port}`);
+      console.log(`Server running on http://localhost:${this.port}🚀`);
     });
   }
 }
